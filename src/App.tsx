@@ -9,6 +9,12 @@ import './App.css'
 
 type PemTab = 'cert' | 'key'
 
+const PEM_PREVIEW_LINES = 8
+
+function previewPem(pem: string, lineCount = PEM_PREVIEW_LINES): string {
+  return pem.replace(/\s+$/, '').split('\n').slice(0, lineCount).join('\n')
+}
+
 export default function App() {
   const [domain, setDomain] = useState('www.bing.com')
   const [days, setDays] = useState(36500)
@@ -228,9 +234,20 @@ export default function App() {
                 </div>
               </div>
 
-              <pre className="pem" tabIndex={0}>
-                {pemTab === 'cert' ? result.certPem : result.keyPem}
-              </pre>
+              <div
+                className="pem-preview"
+                aria-label={
+                  pemTab === 'cert'
+                    ? '证书 PEM 预览（已截断）'
+                    : '私钥 PEM 预览（已截断）'
+                }
+              >
+                <pre className="pem" aria-hidden="true">
+                  {previewPem(
+                    pemTab === 'cert' ? result.certPem : result.keyPem,
+                  )}
+                </pre>
+              </div>
             </>
           )}
         </section>
