@@ -128,7 +128,7 @@
   font: inherit;
   font-size: 0.92rem;
   cursor: pointer;
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, opacity 160ms ease;
 }
 
 .btn:hover:not(:disabled) {

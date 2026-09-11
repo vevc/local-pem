@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { downloadTextFile } from './lib/download'
 import {
@@ -23,9 +23,13 @@ export default function App() {
   const [result, setResult] = useState<GeneratedCert | null>(null)
   const [pemTab, setPemTab] = useState<PemTab>('cert')
   const [copyHint, setCopyHint] = useState<string | null>(null)
+  const isGeneratingRef = useRef(false)
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    if (isGeneratingRef.current) return
+    isGeneratingRef.current = true
+
     setError(null)
     setCopyHint(null)
     setLoading(true)
@@ -41,6 +45,7 @@ export default function App() {
       setResult(null)
     } finally {
       setLoading(false)
+      isGeneratingRef.current = false
     }
   }
 
@@ -100,8 +105,8 @@ export default function App() {
               />
             </label>
 
-            <button type="submit" className="btn primary" disabled={loading}>
-              {loading ? '正在生成 RSA-2048…' : '生成证书'}
+            <button type="submit" className="btn primary" aria-busy={loading}>
+              生成证书
             </button>
           </form>
 
