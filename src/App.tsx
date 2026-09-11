@@ -65,11 +65,7 @@ export default function App() {
         <p className="brand">local-pem</p>
         <h1>浏览器内生成自签证书</h1>
         <p className="lede">
-          等价于{' '}
-          <code>
-            openssl req -x509 -newkey rsa:2048 -nodes
-          </code>
-          ，密钥仅在本地内存中生成，不会上传。
+          等价于 <code>openssl req -x509 -newkey rsa:2048 -nodes</code>，密钥仅在本地内存中生成，不会上传。
         </p>
       </header>
 

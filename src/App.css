@@ -29,7 +29,6 @@
 
 .lede {
   margin: 0;
-  max-width: 42rem;
   color: var(--muted);
   font-size: 1.05rem;
   line-height: 1.55;
@@ -39,7 +38,7 @@
   font-family: var(--font-mono);
   font-size: 0.86em;
   color: var(--accent-ink);
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 
 .layout {
